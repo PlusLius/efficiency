@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jsOperatingMechanism</title>
+</head>
+<body>
+    <script>
+        /*
+            运行机制
+            如何理解js中的单线程?
+            什么是任务队列?
+            什么是EventLoop?
+        */
+    </script>
+    <script>
+        console.log(1)
+        setTimeout(function(){
+            console.log(3)
+        },0)
+        console.log(2)
+    </script>
+    <script>
+        console.log('A')
+        while(true){}
+        console.log('B')
+    </script>
+    <script>
+        for(var i = 0 ; i < 4 ; i++){
+            setTimeout(function(){
+                console.log(i)
+            },0)
+        }
+    </script>
+</body>
+</html>

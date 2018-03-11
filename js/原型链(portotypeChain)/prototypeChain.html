@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prototypeChain</title>
+</head>
+<body>
+    <script>
+        /*
+            原型链
+                1.创建对象有几种方法?
+                 var o1 = {name:'o1'}
+                 var o11 = new Object({name:'o11'})
+
+                 var M = function(){this.name='o2'}
+                 var o2 = new M()
+
+                 var P = {name:123}
+                 var o3 = Object.create(P)
+
+                2.原型,构造函数,实例,原型链?
+                3.instanceof的原理?
+                4.new 运算符
+                 一个新对象被创建,它继承自foo.prototype,
+                 构造函数foo被执行,执行的时候,相应的传参会被传入,同时上下文(this)
+                 会被指定为这个新实例,new foo()等同于new foo(),只能用在不传递任何参数的情况
+                 如果构造函数返回了一个'对象',那么这个对象会取代整个new 出来的结果.如果构造函数
+                 没有返回对象,那么new出来的结果为步骤1创建的对象
+        */
+    </script>
+    <script>
+        //第一种方式: 字面量
+        var o1 = {name:'o1'}
+        var o2 = new Object({name:'o2'})
+
+        //第二种方式: 通过构造函数
+        var M = function(name){this.name = name}
+        var o3 = new M('o3')
+
+        //第三种方式: Object.create()
+        var p = {name: 'p'}
+        var o4 = Object.create(p)
+    </script>
+
+    <script>
+        //new 运算符的工作原理
+        function new2(func){
+            var F = Object.create(func.prototype);
+            var o = func.call(F)
+            if(typeof o  === 'object'){
+                return o
+            }
+            else{
+                return F
+            }
+        }
+
+        new A()
+    </script>
+</body>
+</html>

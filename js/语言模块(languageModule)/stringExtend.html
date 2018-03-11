@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>string扩展</title>
+</head>
+<body>
+    <script>
+        /*
+            string拓展
+            1.ES6
+                (1).startsWidth
+                (2).endsWidth
+                (3).contains(includes)
+                (4).pad(fillZero)
+                (5).repeat
+            2.风格转换
+                (1).capitalize
+                (2).dasheize
+                (3).camelize
+                (4).underscored
+            3.ES5
+                (1).trim
+            4.标签处理
+                (1).scripTags
+                (2).scripScrips
+                (3).escapeHTML
+                (4).unescapeHTML
+                (5).wbr
+            5.format
+            6.truncate
+            7.bytel.en
+            8.正则处理escapeRegExp
+        */
+    </script>
+    <script>
+        //contains 方法：判定一个字符串是否包含另一个字符串。
+        function contains(target,it){
+            return target.indexOf(it) != -1;
+        }
+
+        //判定一个元素的className是否包含某个特定的class。
+        function contains(target,str,separator){
+            return separator ? (separator + target + separator).indexOf(separator + str + separator) > -1 :
+             target.indexOf(str) > -1
+        }
+    </script>
+    <script>
+        //startsWidth方法:判定目标字符串是否位于原字符串的开始处
+        //最后一个参数是忽略大小写
+        function startsWidth(target,str,ignorecase){
+            var start_str = target.substr(0,str.length)
+            return ignorecase ? start_str.toLowerCase() === str.toLowerCase() : start_str === str
+        }
+        //endsWith方法：与startsWith方法相反。
+        function endsWidth(target,str,ignorecase){
+            var end_str = target.substring(target.length - str.length);
+            return ignorecase ? end_str.toLowerCase() === str.toLowerCase() : end_str === str;
+        }
+    </script>
+    <script>
+        //repeat: 将一个字符串重复自身N次
+        function repeat(target,n){
+            return (new Array(n + 1)).join(target)
+        }
+        //改良 省去创建Array的步骤
+        function repeat(target,n){
+            return Array.prototype.join.call({
+                length: n + 1
+            },target)
+        }
+        //改良 利用闭包缓存 ,避免每次重新创建与寻找方法
+        var repeat = (function(target,n){
+            var join = Array.prototype.join,obj = {};
+            return function(target,n){
+                obj.length = n + 1;
+                return join.call(obj,target)
+            }
+        })()
+        //改良 从算法着手
+        function repeat(target,n){//a
+            var s = target, total = [];
+            while( n > 0 ){
+                if( n % 2 == 1 ){         //total[0]=a total[1]=aa
+                    total[total.length] = s //如果是奇数
+                }
+                if( n == 1 ){
+                    break;
+                }
+                s += s; //aaaa 
+                n = n >> 1 //相当于将n除以2取其商,或说开2二次方
+            }
+            return total.join('')
+        }
+        //改良 避免创建数组和使用join
+        function repeat(target,n){
+            var s = target,c = s.length * n
+            do{
+                s += s
+            }while(n = n >> 1){
+                s = s.subString(0,c);
+                return s
+            }
+        }
+        //改良 
+        function repeat(target,n){
+            var s = target, total = "";
+            while(n > 0){
+                if( n > 0 ){
+                    if( n % 2 == 1 ){
+                        total += s
+                    }
+                    if ( n == 1 ){
+                        break
+                    }
+                    s += s;
+                    n = n >> 1
+                }
+            }
+            return total
+        }
+    </script>
+</body>
+</html>

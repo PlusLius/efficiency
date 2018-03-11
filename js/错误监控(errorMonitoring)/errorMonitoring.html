@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>errorMonitoring</title>
+</head>
+<body>
+    <script>
+        /*
+            错误监控类
+            1.前端错误的分类
+            2.错误的捕获方式
+                (1)即时运行错误的捕获方式
+                   1.try.catch
+                   2.window.onerror
+                (2)资源加载错误
+                    1.object.onerror
+                    2.performance.getEntries()
+                    3.Error事件捕获
+                延伸:跨域的js运行错误可以捕获吗,错误提示是什么,应该怎么处理
+                    可以,但是行号,列号,错误文件拿不到
+                    处理:
+                      1.在script标签添加crossorigin属性
+                      2.设置js资源响应头Access-Control-Allow-Origin:*
+            3.上报错误的基本原理
+              1.采用Ajax通信的方式上报
+              2.利用Image对象上报
+        */
+    </script>
+
+    <script>
+        //错误对象添加onerror
+        img.onerror = function(){}
+        script.onerror = function(){}
+        img.addEventListener('error',function(e){
+            console.log(e)
+        })
+        script.addEventListener('error',function(e){
+            console.log(e)
+        })
+    </script>
+
+    <script>
+        //资源加载错误不会冒泡
+        //事件的捕获阶段能拿到错误对象
+        window.addEventListener('error',function(e){
+            console.log(e)
+        },true)
+    </script>
+    <script src="//baidu/test.js"></script>
+
+    <script>
+        //获取资源加载时长 performance.getEntries()
+         document.getElementsByTagName('img') - performance.getEntries()//img的部分得到的就是未加载的部分
+    </script>
+
+    <script>
+        /*跨域捕获错误
+           1.在script标签增加crossorigin属性
+           2.设置js资源响应头Access-Control-Allow-Origin 
+        */
+    </script>
+
+    <script>
+        //上报错误信息
+        //利用Image对象进行错误上报
+        (new Image()).src = "http://baidu.com/tesjk?r=2113";
+    </script>
+</body>
+</html>

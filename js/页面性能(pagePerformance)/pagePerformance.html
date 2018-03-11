@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pagePerformance</title>
+</head>
+<body>
+    <script>
+        /*
+            提升页面性能的方法有哪些?
+            1.资源合并压缩
+            2.非核心代码异步加载 -> 异步加载的方式 -> 异步加载的区别
+                (1).异步加载的方式:
+                    1.动态脚本加载
+                    2.defer
+                    3.asnyc
+                (2).异步加载的区别
+                    (1).defer是在HTML解析完之后才执行,如果是多个,按照加载的顺序依次执行
+                    (2).async是在加载完之后立即执行,如果是多个,执行顺序和加载顺序无关
+
+            3.利用浏览器缓存 -> 缓存的分类 -> 缓存的原理
+                (1).强缓存
+                    Expires Expires:Thu,21 Jan 2017 23:39:02 GMT //绝对时间 服务器时间
+                    Cache-Control Cache-Control:max-age=3600 //相对时间 设置缓存时间
+                (2).协商缓存
+                    Last-Modified If-Modified-Since Last-Modified: Wed,26 Jan 2017 00:35:11 GMT
+                    //当强缓存失效时,请求的时候是以If-Modified-Since字段携带 Last-Modified 字段的时间
+                    Etag If-None-Match
+                    //当强缓存失效时,内容并没有变化的时候,把IF-None-Match为键把Etag带过去
+            4.使用CDN
+            5.预解析DNS
+            HTTP:a标签默认开启预解析DNS
+            HTTPS:要进行以下操作
+            <meta http-equiv="x-dns-prefetch-control" content="on">
+            <link rel="dns-prefetch" href="//host_name_to_prefetch.com">
+        */
+    </script>
+</body>
+</html>

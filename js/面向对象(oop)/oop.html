@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>oop</title>
+</head>
+<body>
+    <script>
+        /*
+            面向对象
+                1.类与实例
+                    类的声明
+                    生成实例
+                2.类与继承
+                    如何实现继承
+                    继承的几种方式
+        */
+    </script>
+    <script>
+        //类的声明
+        function Animal1(){
+
+        }
+
+        //ES6类的声明
+        class Animal2{
+            constructor(){
+
+            }
+        }
+
+        //实例化
+        new Animal1()
+        new Animal2()
+
+    </script>
+    <script>
+        //js继承的方式
+        /*
+            1.借助构造函数实现继承
+            缺点: 不能继承父类原型的属性和方法
+        */
+        function Parent1(){
+            this.name = 'parent1'
+        }
+        Parent1.prototype.say = 'hi'
+
+        function Child1(){
+            Parent1.call(this);
+            this.name = 'child1'
+        }
+
+        new Child1
+
+        /*
+            2.借助原型链实现继承
+            缺点: 父类的属性和方法,子类实例都是共享的
+        */
+        function Parent2(){
+            this.name = 'Parent2'
+            this.play = [1,2,3,4]
+        }
+
+        function Child2(){
+            this.name = 'Child2'
+        }
+
+        Child2.prototype = new Parent2()
+
+        var o1 = new Child2();
+        var o2 = new Child2();
+
+        o1.play.push(5)
+        o1.play // [1,2,3,4,5]
+        o2.play // [1,2,3,4,5]
+
+        /*
+            3.组合方式
+            缺点: 子类实例化的时候,父类被调用了2次
+        */
+        function Parent3(){
+            this.name = 'parent3'
+            this.play = [1,2,3,4]
+
+        }
+
+        function Child3(){
+            Parent3.call(this)
+            this.name = 'child3'
+        }
+
+        Child3.prototype = new Parent3();
+
+        var o1 = new Child3();
+        var o2 = new Child3();
+
+        o1.play.push(5)
+        o1.play //[1,2,3,4,5]
+        o2.play //[1,2,3,4]
+
+        /*
+            组合方式的优化1
+            缺点: 子类实例无法确定构造函数是谁
+        */
+        function Parent4(){
+            this.name = 'parent4'
+            this.play = [1,2,3,4]
+
+        }
+
+        function Child4(){
+            Parent3.call(this)
+            this.name = 'child4'
+        }
+
+        Child4.prototype = Parent4.prototype;
+
+        var o1 = new Child4();
+
+        o1 instanceof Child4 //true
+        o1 instanceof Parent4 //true
+        
+        o1.constructor //Parent4
+
+        /*
+            组合继承优化2
+        */
+        function Parent5(){
+            this.name = 'Parent5';
+        }
+        function Child5(){
+            Parent5.call(this)
+            this.name = 'Child5';
+        }
+        Child5.prototype = Object.create(Parent5.prototype)
+        Child5.prototype.constructor = Child5
+
+        var o1 = new Child5();
+        
+        o1 instanceof Child5 //true
+        o1 instanceof Parent5 //true
+        o1.constructor //Child5
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mvvmFramWork</title>
+</head>
+<body>
+    <script>
+        /*
+            MvvM框架
+                1.了解MVVM框架吗?
+                    (1).先聊MVC
+
+                    (2).聊聊MVVM的定义
+                2.谈谈你对MVVM的认识
+
+                    View ->  ViewModel -> Model
+                         <-            <-
+
+                3,双向绑定是什么原理,可以写出来吗?
+                         input事件
+                    view -> data
+                         <-
+                         Object.defineProperty
+                4.使用了什么设计模式?
+                          监听              通知         回调
+                    Data ------> Observer -------> Dep -------> Watcher
+                    View <------  Watcher          Dep <-------
+                           更新                              订阅 
+
+                5.生命周期是什么?
+
+                6.有看过源码吗?
+        */  
+    </script>
+    <script>
+        //Object.defineProperty
+        var obj1 = {}
+        var descriptor = Object.create(null)//没有继承的属性
+        //默认没有enumerable,没有configurable,没有writable
+        descriptor.value = 'static'
+        Object.defineProperty(obj1,'key',descriptor)
+    </script>
+    <script>
+        //显示
+        var obj2 = {}
+        Object.defineProperty(obj2,'key',{
+            enumerable:true,
+            configurable:true,
+            writable:true,
+            value:'static'
+        })
+    </script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                title:'vue code',
+                name:'imooc'
+            },
+            methods:{
+                clickMe:function(){
+                    this.title = 'vue code click'
+                },
+            },
+            mounted:function(){
+                window.setTimeout(()=>{
+                    this.title = 'timeOut 1000'
+                },1000)
+            }
+        })
+    </script>	
+</body>
+</html>

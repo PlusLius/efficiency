@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>classTransform</title>
+</head>
+<body>
+    <script>
+        /*
+            类型转换
+                1.数据类型
+                    (1).原始类型
+                        Boolean Number String Null Undefined Symbol
+                    (2).对象
+                        Object
+                2.显示类型转换
+                    Number函数
+                        原始类型转换
+                            数值:转换后还是原来的值
+                            字符串:如果可以被解析为数值,则转换为相应的数值,否则得到NaN,空字符串转为0
+                            布尔值:true转为1,false转为0
+                            Undefined:转成NaN
+                            null:转成0
+                        对象类型转换
+                            先调用对象自身的valueOf方法,如果该方法返回原始类型的值,则直接对该值使用Number方法
+                            不再进行后续步骤
+
+                            如果valueOf返回复合类型的值,在调用对象自身的toString方法,如果toString方法返回原始
+                            类型的值,则对该值使用Number方法,不再进行后续步骤
+
+                            如果toString方法返回的是复合类型的值,则报错
+                    String函数
+                        原始类型转换
+                            数值:转为相应的字符串
+                            字符串:转换后还是原来的值
+                            布尔值:true转为'true',false转为'false'
+                            Undefined:转成'undefined'
+                            null:转成'null'
+                        对象类型转换
+                            先调用toString方法,如果toString方法返回原始类型的值,则对该值使用String方法
+                            不再进行以下步骤
+
+                            如果toString方法返回复合类型的值,再调用valueOf方法,如果valueOf返回的是原始
+                            类型的值,则对该值使用String方法,不再进行一下步骤
+
+                            如果valueOf返回的是复合类型的值,则报错
+                    Boolean函数
+                        原始类型转换
+                            undefined
+                            null
+                            -0          => false
+                            +0          
+                            NaN
+                            ''(空字符串)
+                3.隐式类型转换
+                    四则运算
+                    判断语句
+                    Native调用
+                    
+                    常见题目
+                        [] + []
+                        [] + {}
+                        {} + {}
+                        true + true
+                        1 + {a:1}
+
+                类型转换typeof 
+                    undefined  -> 'undefined'
+                    Null -> 'object'
+                    Boolean -> 'boolean'
+                    Number -> 'number'
+                    String -> 'string'
+                    Symbol -> 'symbol'
+                    Host object -> 'Implementation dependent'
+                    Function object -> 'object'
+                    Any other object -> 'object'
+        */
+    </script>
+</body>
+</html>

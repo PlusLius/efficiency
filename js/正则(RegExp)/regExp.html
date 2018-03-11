@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>regExp</title>
+</head>
+
+<body>
+    <script>
+        /*用法:
+             1./parttern/attributes 
+             2.new RegExp(parttern,attributes)
+          支持正则对象的String对象方法
+             1.stringObj.serach(regExp)
+             2.stringObj.match(regExp)
+                (1).第一个元素存放的是匹配的文本
+                (2).第二个元素存放的是匹配文本的起始字符在str中的位置
+                (3).input属性的声明是表明stringObj对象的引用
+             3.stringObj.replace(regExp)
+             4.stringObj.split(regExp)
+          RegExp对象方法
+             1.test()方法
+             2.exec()方法
+          正则元字符
+            .查找任意的单个字符，除换行符外
+            \w 任意一个字母或数字或下划线，A_Za_Z0_9,_中任意一个
+            \W 查找非单词的字符，等价于[^A_Za_z0_9_]
+            \d 匹配一个数字字符，等价于[0-9]
+            \D 匹配一个非数字字符，等价于[^0-9]
+            \s 匹配任何空白字符，包括空格，制表符，换行符等等。等价于[\f\n\r\t\v]
+            \S 匹配任何非空白字符，等价于[^\f\n\r\t\v]
+            \b 匹配一个单词边界，也就是指单词和空格间的位置，比如’er\b’可以匹配”never”中的”er”,但是不能匹配”verb”中的”er”
+            \B 匹配非单词边界,’er\B’能匹配’verb’中的’er’,但不能匹配’never’中的’er’
+            \0 查找NUL字符。
+            \n 匹配一个换行符
+            \f 匹配一个换页符
+            \r 匹配一个回车符
+            \t 匹配一个制表符
+            \v 匹配一个垂直制表符
+            \xxx 查找一个以八进制数xxx规定的字符
+            \xdd 查找以16进制数dd规定的字符
+            \uxxxx 查找以16进制数的xxxx规定的Unicode字符。
+          正则中需要转义的字符
+            ^ 匹配输入字符串的开始位置，匹配^本身的话，使用\^
+
+            * 匹配前面的子表达式的零次或者多次，匹配*本身的话，使用\*
+
+            + 匹配子表达式的1次或者多次，匹配+本身的话，使用\+
+
+            . 匹配除换行符之外的任何一个字符，匹配.本身的话，使用\.
+
+            [ 匹配一个中括号开始，匹配本身的，使用\[
+
+            ? 匹配前面的子表达式的零次或者1次，或指明一个非贪婪限定符，要匹配本身的话，使用\?
+
+            \ 匹配本身的话，请使用\\
+
+            { 标记限定符开始的地方，要匹配{ ,请使用\{
+
+            | 指明多项中的一个选择，可以理解含义为或的意思，匹配本身的话，使用\|
+           正则中的量词
+            n+ 匹配任何至少包含一个n的字符串
+
+            n* 匹配零个或者多个n的字符串
+
+            n? 匹配零个或者1个n的字符串
+
+            n{x} 匹配包含x个n的序列字符串
+
+            n{x,y} 匹配至少x个，最多y个n的字符串
+
+            n{x,} 匹配至少x个的字符串
+
+            n$ 匹配以n结尾的字符串
+
+            ^n 匹配以n开头的字符串
+
+            ?=n 匹配其后紧接指定的n字符串
+
+            ?!n 匹配其后没有紧接指定的n字符串
+           非贪婪模式
+            {x,y}?，{x,}?，??，*?，和 +?
+           正则表达式匹配原理
+            1.占有字符和零宽度
+            
+        */
+    </script>
+<script>
+    var str = "hello world,hello world";
+        // 返回匹配到的第一个位置(使用的regexp对象检索)
+        // console.log(str.search(/hello/))
+        // 没有全局的概念 总是返回匹配到的第一个位置
+        // console.log(str.search(/hello/g))
+</script>
+<script>
+    var str = "hello world";
+    // console.log(str.match("hello"))//["hello", index: 0, input: "hello world"]
+    // console.log(str.match(/hello/)); // ["hello", index: 0, input: "hello world"]
+    //全局匹配
+    var str2 = "1 plus 2 equal 3"
+        // console.log(str2.match(/\d+/g))
+</script>
+<script>
+    var str = "hello world";
+    var s2 = str.replace(/hello/, 'b')
+    // console.log(s2)
+
+    // $1,$2 代表的是第一个和第二个子表达式相匹配的文本
+    // 子表达式需要使用小括号括起来,代表的含义是分组
+    var name = "longen,yunxi";
+    var s3 = name.replace(/(\w+)\s*,\s*(\w+)/, "$2 $1");
+    // console.log(s3)
+
+    // $& 是与RegExp相匹配的子字符串
+    var name = "hello I am a chinese people";
+    var regexp = /am/g;
+
+    if (regexp.test(name)) {
+        //返回正则表达式匹配项的字符串
+        //  console.log(RegExp['$&'])
+
+        //  //返回被搜索的字符串中从最后一个匹配位置开始到字符串结尾之间的字符。
+        //  console.log(RegExp["$'"])
+
+        //  //返回被查找的字符串从字符串开始的位置到最后匹配之前的位置之间的字符。
+        //  console.log(RegExp["$`"])
+
+        //  // 返回任何正则表达式查找过程中最后括号的子匹配。
+        //  console.log(RegExp['$+'])
+
+        // //返回任何正则表达式搜索过程中的最后匹配的字符。
+        //  console.log(RegExp['$_'])
+    }
+
+    // replace 第二个参数也可以是一个function 函数
+    /*
+    * 如下函数，回调函数参数一共有四个
+    * 第一个参数的含义是 匹配的字符串
+    * 第二个参数的含义是 正则表达式分组内容，没有分组的话，就没有该参数,
+    * 如果没有该参数的话那么第四个参数就是undefined
+    * 第三个参数的含义是 匹配项在字符串中的索引index
+    * 第四个参数的含义是 原字符串
+    */
+    var name2 = "123sdasadsr44565dffghg987gff33234";
+    name2.replace(/\d+/g, function (v) {
+        // console.log(v)
+    })
+    name2.replace(/\d+/g, function (a, b, c, d) {
+        // console.log(a);
+        // console.log(b);
+        // console.log(c);
+        // console.log(d);
+    })
+</script>
+<script>
+    var str = "longen and yunxi";
+    console.log(/longen/.test(str)); // true
+    console.log(/longlong/.test(str)); //false
+    // 或者创建RegExp对象模式
+    var regexp = new RegExp("longen");
+    console.log(regexp.test(str)); // true
+</script>
+<script>
+    var str = "longen and yunxi";
+    console.log(/longen/.exec(str));
+    //index 匹配到的文本的第一个字符的位置
+    //input 被检索的字符串string
+    // 打印 ["longen", index: 0, input: "longen and yunxi"]
+
+    // 假如没有找到的话，则返回null
+    console.log(/wo/.exec(str)); // null
+</script>
+<script>
+    var str = "Is this all \nthere is?";
+    // console.log(/\n/g.exec(str));
+
+    //匹配8进制xx规定的字符
+    var str = "Visit W3School. Hello World!";
+    // console.log(/\127/g.exec(str)); // ["W", index: 6, input: "Visit W3School. Hello World!"]
+
+    //匹配16进制规定的字符
+    var str = "Visit W3School. Hello World!";
+    // console.log(/\x57/g.exec(str)); // ["W", index: 6, input: "Visit W3School. Hello World!"]
+
+    //匹配unicode编码字符
+    var str = "Visit W3School. Hello World!";
+    // console.log(/\u0057/g.exec(str)); // ["W", index: 6, input: "Visit W3School. Hello World!"]
+</script>
+<script>
+    //正则量词
+    var str = "hello longen";
+
+    // 匹配至少一个或者多个l的字符串
+    console.log(str.match(/l+/g)); //["ll", "l"]
+
+    // 匹配至少一个或者多个字母数字或者下划线
+    console.log(str.match(/\w+/g)); //["hello", "longen"]
+
+    var str = "hello longen hello";
+
+    // 匹配至少零个或者多个l的字符串 
+
+    // 可以匹配多个l或者不匹配l 全局匹配
+
+    console.log(str.match(/el*/g)); //["ell", "e", "ell"]
+
+    // 可以匹配多个u或者不匹配u 全局匹配
+
+    console.log(str.match(/hu*/g)); //["h", "h"]
+
+    var str = "hello longen hello";
+
+    // 匹配至少零个或者1个l的字符串 
+
+    console.log(str.match(/el?/g)); //["el", "e", "el"]
+
+    // 可以匹配1个u或者不匹配u 全局匹配
+
+    console.log(str.match(/hu?/g)); //["h", "h"]
+
+    var str = "my name is longen";
+
+    // 匹配以na其后紧接m的字符串
+
+    // ?= 只是匹配位置，不会返回值
+
+    console.log(str.match(/na(?=m)/g)); //["na"]
+
+    var str = "my name is longen";
+
+    // 匹配以na其后不紧接ma的字符串
+
+    // ?! 只是匹配位置，不会返回值
+
+    console.log(str.match(/na(?!ma)/g)); //["na"]
+
+    console.log(str.match(/na(?!m)/g)); // null
+</script>
+<script>
+    //贪婪模式
+    var str = "longen<p>我是中国人</p>yunxi<p>我是男人</p>boyboy";
+    // 贪婪模式 匹配所有字符
+    console.log(str.match(/<p>.*<\/p>/)[0]); 
+    // 后面加问号，变成非贪婪模式
+    console.log(str.match(/<p>.*?<\/p>/)[0]); // <p>我是中国人</p>
+</script>
+</body>
+
+</html>
